@@ -1,10 +1,12 @@
 user admin:  
 username: admin 
 pwd:12345678
+link (if your setup is localhost) : http:localhost/ekfc/login
 
 user for movies: 
 username: asif.85@live.com  
 pwd: 12345678
+link  (if your setup is localhost): http:localhost/ekfc
 
 DB: db_vr.sql  => the file is already provided, just import it in your local server or web server.
 
