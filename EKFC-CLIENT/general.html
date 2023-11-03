@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>AdminLTE 3 | General Form Elements</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="dist/css/adminlte.min.css">
+  <!-- Google Font: Source Sans Pro -->
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+</head>
+<body class="hold-transition sidebar-mini">
+<div class="wrapper">
+  <!-- Navbar -->
+
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container --><!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- left column -->
+          <div class="col-md-6">
+            <!-- general form elements -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Quick Example</h3>
+              </div>
+              <!-- /.card-header -->
+              <!-- form start -->
+             
+              <form role="form" method="post" id="myform" action="http://localhost/ekfc/Home/create_movie" enctype="multipart/form-data">
+                <div class="card-body">
+					<div class="row">
+						<div class="col-md-12">
+			<div class="card card-warning">
+				  <div class="card-header">
+                <h3 class="card-title green">Basic Details</h3>
+              </div>
+			</div>	
+							</div>	
+						</div>
+					<div class="row">
+				<div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Name or Title  &nbsp;<code>*</code></label>
+                    <input type="text" name="title" value="" required class="form-control title" id="exampleInputEmail1" placeholder="Enter Title">
+                  </div>
+					
+					 <div class="form-group">
+                    <label for="exampleInputEmail1">Genre &nbsp;<code>*</code></label>						 
+					<select name="genere"  required class="form-control type"  placeholder="Select Genre">
+						<option value=""></option>
+						<option value="Action">Action</option>
+						<option value="Comedy">Comedy</option>
+						<option value="Documentary">Documentary</option>
+						<option value="Drama">Drama</option>
+						<option value="Fantasy">Fantasy</option>
+						<option value="Horror">Horror</option>
+						<option value="Musical">Musical</option>
+						<option value="Mystery">Mystery</option>
+						<option value="Romance">Romance</option>
+						<option value="Science Fiction">Science Fiction</option>
+						<option value="Thriller">Thriller</option>
+						<option value="Western">Western</option>						
+					</select>                 
+                  </div>
+					
+					
+				 <div class="form-group">
+                    <label for="exampleInputFile">Cover Picture</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="cover_picture"  accept=".jpg,.jpeg,.png,.heic" class="custom-file-input cover_picture" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    
+                    </div>
+                  </div>
+			
+					
+					
+					 <div class="form-group">
+                    <label for="exampleInputFile">Video File</label>
+                    <div class="input-group">
+                      <div class="custom-file">
+                        <input type="file" name="movie_file"  accept=".mov,.mp4,.avi" class="custom-file-input movie_file" id="exampleInputFile">
+                        <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                      </div>
+                    
+                    </div>
+                  </div>
+					
+					
+					
+					
+						</div>
+								
+										
+					</div>	
+						
+							
+		
+				<div class="container" class="clearfix">&nbsp;&nbsp;&nbsp;</div>					
+			<div class="unitz"></div>
+					<div class="clearfix">&nbsp;</div>
+					<div class="clearfix">&nbsp;</div>
+					<div class="progress">
+    <div class="progress-bar"></div>
+</div>
+		<div id="uploadStatus"></div>
+          </div>
+				
+				
+				  </div>				  
+                <!-- /.card-body -->
+               
+				  <div class="card-footer">
+                  <input type="submit" class="btn btn-primary" value="submit">
+                </div>
+				
+              </form>
+            </div>
+            <!-- /.card -->
+
+            <!-- Form Element sizes --><!-- /.card --><!-- /.card -->
+
+            <!-- Input addon --><!-- /.card -->
+            <!-- Horizontal Form --><!-- /.card -->
+
+          </div>
+          <!--/.col (left) -->
+          <!-- right column -->
+          <div class="col-md-6">
+            <!-- general form elements disabled --><!-- /.card -->
+            <!-- general form elements disabled --><!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper --><!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="plugins/jquery/jquery.min.js"></script>
+<!-- Bootstrap 4 -->
+<script src="plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<!-- bs-custom-file-input -->
+<script src="plugins/bs-custom-file-input/bs-custom-file-input.min.js"></script>
+<!-- AdminLTE App -->
+<script src="dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="dist/js/demo.js"></script>
+<script type="text/javascript">
+$(document).ready(function () {
+  bsCustomFileInput.init();
+});
+	
+	$(function() {
+    //hang on event of form with id=myform
+    $("#myform").on('submit', function(e){
+        e.preventDefault();
+		 var actionurl = e.currentTarget.action;
+		var title=$(".title").val();
+		var genre=$(".type").val();
+		var cover_picture=$(".cover_picture").val();
+		var movie_file=$(".movie_file").val();
+		 jQuery.ajax({
+        url: actionurl,
+        type: "POST",       
+		data : new FormData(this),
+       processData: false,  // tell jQuery not to process the data
+       contentType: false,  // tell jQuery not to set contentType
+		         success: function (result) {
+       alert("Movie Uploaded");	
+        },
+        error: function (err) {
+            // check the err for error details
+        }
+    }); 
+		
+	
+    });
+
+});
+	
+	
+
+	
+	
+  $('.custom-file-input').on('change',function(){
+                //get the file name
+                var fileName = $(this).val();
+                //replace the "Choose a file" label
+                $(this).next('.custom-file-label').html(fileName);
+            })
+	
+	
+	function file_label(unit)
+	{
+		
+                //get the file name
+                var fileName = $('.custom-file-input-'+unit+'').val();
+                //replace the "Choose a file" label
+                $('.custom-file-input-'+unit+'').next('.custom-file-label-'+unit+'').html(fileName);
+           
+	}
+</script>
+</body>
+</html>

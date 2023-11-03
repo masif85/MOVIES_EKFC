@@ -11,7 +11,7 @@
  Target Server Version : 100418
  File Encoding         : 65001
 
- Date: 03/11/2023 01:06:50
+ Date: 03/11/2023 16:16:04
 */
 
 SET NAMES utf8mb4;
@@ -73,6 +73,58 @@ CREATE TABLE `moe_sessions`  (
 -- ----------------------------
 -- Records of moe_sessions
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for pagination_table
+-- ----------------------------
+DROP TABLE IF EXISTS `pagination_table`;
+CREATE TABLE `pagination_table`  (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  `age` int(10) NOT NULL,
+  `dept` varchar(250) CHARACTER SET latin1 COLLATE latin1_swedish_ci NOT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of pagination_table
+-- ----------------------------
+INSERT INTO `pagination_table` VALUES (1, 'Ahsan', 22, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (2, 'Ali', 25, 'Human Resource');
+INSERT INTO `pagination_table` VALUES (3, 'Kashif', 30, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (4, 'Iqbal', 31, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (5, 'Farooq', 34, 'Finance');
+INSERT INTO `pagination_table` VALUES (6, 'Adnan', 29, 'Finance');
+INSERT INTO `pagination_table` VALUES (7, 'Javed', 25, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (8, 'Irfan', 35, 'Production');
+INSERT INTO `pagination_table` VALUES (9, 'Kamran', 34, 'Production');
+INSERT INTO `pagination_table` VALUES (10, 'Danish', 27, 'Finance');
+INSERT INTO `pagination_table` VALUES (11, 'Naghman', 26, 'Administration');
+INSERT INTO `pagination_table` VALUES (12, 'Riaz', 37, 'Administration');
+INSERT INTO `pagination_table` VALUES (13, 'Imran', 36, 'Finance');
+INSERT INTO `pagination_table` VALUES (14, 'Wajahat', 28, 'Administration');
+INSERT INTO `pagination_table` VALUES (15, 'Arsalan', 31, 'Finance');
+INSERT INTO `pagination_table` VALUES (16, 'Sheraz', 34, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (17, 'Faraz', 30, 'Marketing');
+INSERT INTO `pagination_table` VALUES (18, 'Ayaaz', 28, 'Marketing');
+INSERT INTO `pagination_table` VALUES (19, 'Abbas', 26, 'Finance');
+INSERT INTO `pagination_table` VALUES (20, 'Bilal', 33, 'Quality Assurance');
+INSERT INTO `pagination_table` VALUES (21, 'Jibran', 28, 'Quality Assurance');
+INSERT INTO `pagination_table` VALUES (22, 'Nasir', 36, 'Finance');
+INSERT INTO `pagination_table` VALUES (23, 'Mohsin', 29, 'Marketing');
+INSERT INTO `pagination_table` VALUES (24, 'Yaqoob', 35, 'Production');
+INSERT INTO `pagination_table` VALUES (25, 'Hammad', 30, 'Quality Assurance');
+INSERT INTO `pagination_table` VALUES (26, 'Imran', 30, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (27, 'Kashif', 28, 'Finance');
+INSERT INTO `pagination_table` VALUES (28, 'Azhar', 27, 'Human Resource');
+INSERT INTO `pagination_table` VALUES (29, 'Misbah', 33, 'Marketing');
+INSERT INTO `pagination_table` VALUES (30, 'Tabish', 27, 'Quality Assurance');
+INSERT INTO `pagination_table` VALUES (31, 'Furqan', 35, 'Marketing');
+INSERT INTO `pagination_table` VALUES (32, 'Ilyas', 25, 'Finance');
+INSERT INTO `pagination_table` VALUES (33, 'Kamran', 24, 'Information Technology');
+INSERT INTO `pagination_table` VALUES (34, 'Babar', 29, 'Finance');
+INSERT INTO `pagination_table` VALUES (35, 'Adnan', 32, 'Marketing');
+INSERT INTO `pagination_table` VALUES (36, 'Wasif', 25, 'Finance');
 
 -- ----------------------------
 -- Table structure for tbl_cms_sessions_log
@@ -217,7 +269,7 @@ CREATE TABLE `tbl_user_access_permissions`  (
   `method_slug` varchar(64) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '0',
   `access_type` enum('Private','Public') CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT 'Public',
   PRIMARY KEY (`access_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 316 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 320 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tbl_user_access_permissions
@@ -265,6 +317,10 @@ INSERT INTO `tbl_user_access_permissions` VALUES (312, 1, 'Admin', 'send_notific
 INSERT INTO `tbl_user_access_permissions` VALUES (313, 1, 'Admin', 'notifications', 'Public');
 INSERT INTO `tbl_user_access_permissions` VALUES (314, 1, 'Admin', 'update_settings', 'Public');
 INSERT INTO `tbl_user_access_permissions` VALUES (315, 2, 'Admin', 'update_settings', 'Public');
+INSERT INTO `tbl_user_access_permissions` VALUES (316, 1, 'Admin', 'view_user_movies', 'Public');
+INSERT INTO `tbl_user_access_permissions` VALUES (317, 2, 'Admin', 'view_user_movies', 'Public');
+INSERT INTO `tbl_user_access_permissions` VALUES (318, 2, 'Admin', 'sub_rating', 'Public');
+INSERT INTO `tbl_user_access_permissions` VALUES (319, 1, 'Admin', 'sub_rating', 'Public');
 
 -- ----------------------------
 -- Table structure for tbl_user_access_permissions_overwrite
@@ -3575,7 +3631,7 @@ CREATE TABLE `tbl_user_modules`  (
   `added_by` int(11) NULL DEFAULT NULL,
   `last_modified_by` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`module_id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 37 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 40 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tbl_user_modules
@@ -3616,6 +3672,8 @@ INSERT INTO `tbl_user_modules` VALUES (33, 'Admin', 'send_notification', 'Send N
 INSERT INTO `tbl_user_modules` VALUES (34, 'Admin', 'notifications', 'notifications', '2022-12-14 08:23:06', '2022-12-14 08:23:11', 1, 1);
 INSERT INTO `tbl_user_modules` VALUES (35, 'Admin', 'send_notifications', 'send_notifications', '2022-12-14 08:23:13', '2022-12-14 08:23:16', 1, 1);
 INSERT INTO `tbl_user_modules` VALUES (36, 'Admin', 'update_settings', 'UPDATE settings', '2022-12-14 08:33:35', '2022-12-14 08:33:39', 1, 1);
+INSERT INTO `tbl_user_modules` VALUES (37, 'Admin', 'view_user_movies', 'View User Movies', '2023-11-03 07:21:49', '2023-11-02 07:22:06', 1, 1);
+INSERT INTO `tbl_user_modules` VALUES (39, 'Admin', 'sub_rating', 'Submit Rating', NULL, NULL, 1, 1);
 
 -- ----------------------------
 -- Table structure for tbl_user_roles
@@ -3665,7 +3723,7 @@ CREATE TABLE `tbl_users`  (
 -- Records of tbl_users
 -- ----------------------------
 INSERT INTO `tbl_users` VALUES (1, 'admin', '25d55ad283aa400af464c76d713c07ad', 'masif@khaleejtimes.com', '97150546456465', 'superadmin', 'dashboard', '71046d00682cfc20305a703985869d4c.jpg', 3, 'Muhammad', 1, '0');
-INSERT INTO `tbl_users` VALUES (3, 'asif.85@live.com', '25d55ad283aa400af464c76d713c07ad', 'asif.85@live.com', '1234678', 'Administrator', 'dashboard', '7433375.png', 3, 'Muhammad Asif', 2, '0');
+INSERT INTO `tbl_users` VALUES (3, 'asif.85@live.com', '25d55ad283aa400af464c76d713c07ad', 'asif.85@live.com', '1234678', 'Administrator', 'view_user_movies', '7433375.png', 3, 'Muhammad Asif', 2, '0');
 
 -- ----------------------------
 -- Table structure for vr_movies
@@ -3681,13 +3739,24 @@ CREATE TABLE `vr_movies`  (
   `status` tinyint(1) NOT NULL DEFAULT 1,
   `last_updated` datetime(0) NULL DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP(0),
   `created_on` datetime(0) NULL DEFAULT current_timestamp(0),
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `uniques`(`title`, `genere`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 29 CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of vr_movies
 -- ----------------------------
 INSERT INTO `vr_movies` VALUES (1, 'Lion King roars at Etihad Arena', 'b4510b7c3a643cb564799262cb0b0c10.jpg', '65440dbe1bd701698958782.mp4', 'mp4', 'Action', 1, NULL, '2023-11-03 00:59:42');
+INSERT INTO `vr_movies` VALUES (2, 'Movie 2', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, NULL, '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (3, 'Movie 3', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:14', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (4, 'Movie 4', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:15', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (5, 'Movie 5', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:17', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (6, 'Movie 6', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:19', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (7, 'Movie 7', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:20', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (8, 'Movie 8', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:24', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (9, 'Movie 9', '648907ccab55c80c4ca60337ee6ca5a1.png', '654486beac98f1698989758.mp4', 'mp4', 'Comedy', 1, '2023-11-03 12:00:26', '2023-11-03 09:35:58');
+INSERT INTO `vr_movies` VALUES (20, 'Draw- Fifa World Cups', '62d6d8c74d83f845489e0497fd5a15bf.jpg', '6544a78ae4f171698998154.mp4', 'mp4', 'Fantasy', 1, NULL, '2023-11-03 11:55:54');
+INSERT INTO `vr_movies` VALUES (24, 'Annabel', '307bb837ef7f31a4f5056259d3fe137c.png', '6544a85f9e0781698998367.mp4', 'mp4', 'Horror', 1, NULL, '2023-11-03 11:59:27');
 
 -- ----------------------------
 -- Table structure for vr_ratings
@@ -3701,12 +3770,15 @@ CREATE TABLE `vr_ratings`  (
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
   `date` datetime(0) NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vr_ratings
 -- ----------------------------
-INSERT INTO `vr_ratings` VALUES (1, 1, 1, 7.5, NULL, NULL);
+INSERT INTO `vr_ratings` VALUES (1, 1, 1, 2.5, NULL, NULL);
+INSERT INTO `vr_ratings` VALUES (2, 3, 5, 3, '::1', NULL);
+INSERT INTO `vr_ratings` VALUES (3, 3, 3, 4, '::1', NULL);
+INSERT INTO `vr_ratings` VALUES (4, 3, 2, 3, '::1', NULL);
 
 -- ----------------------------
 -- Table structure for vr_users
