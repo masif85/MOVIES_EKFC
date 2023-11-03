@@ -244,51 +244,7 @@ class Home extends CI_Controller {
 		$this->load->view('forgotpassword');
 	}
 		
-	public function send_password()
-	{
-		$utag_data_send_password='var utag_data = {
-		"event_type"       : "page_view",            	
-		"page_lang"        : "English",               	
-		"page_section"     : "section_page",          	 //This should capture dynamically page Category 
-		"page_type"        : "Homepage",             	
-		"tealium_event"    : "Forgot_Pass",           	
-		"user_application" : "'.$this->get_agent().'",             	 //This should capture dynamically desktop or mobile use
-		"user_forget_password"  : "'.$this->input->post("email").'"                  	//This should capture dynamically user email
-		};';
-		
-		$email=$this->input->post("email");
-		$validate=$this->Main_Model->fetch_row("tbl_users","where user_email='$email' and status <> 0");	
-		if($validate!='0')
-		{	
-			$randid=md5(date("dmy-his")).$this->generateRandomString();
-			$data=array("email"=>$email,"userid"=>$validate->id,"encrypted_id"=>$randid);
-			$this->Main_Model->insert_data("tbl_temp",$data);		
-			$email_data["to"]=$email;
-			$email_data["from"]="noreply@competitions.khaleejtimes.com";
-			$email_data["bcc"]="masif@khaleejtimes.com";
-			$email_data["subject"]="Reset Password, Khaleej Times Competition";	
-			$msg_body="Dear $validate->first_name $validate->last_name, <br />
-			We have received your request regarding your password reset, <br />
-			Kindly click on the following link to get an access to reset password screen.	
-			<a href='".base_url()."Home/reset_screen/".md5($email)."/".md5($validate->id)."/".$randid."'>Click to Reset</a> or copy below link to get access <br />
-			<a href='".base_url()."Home/reset_screen/".md5($email)."/".md5($validate->id)."/".$randid."'>".base_url()."/Home/reset_screen/".md5($email)."/".md5($validate->id)."/".$randid."</a>";
-			$email_data["msg_body"]=$msg_body;
-			send_mail($email_data);
-			$this->session->set_flashdata('type', 'success');
-			//$data['msg']="Kindly check your email and follow the instructions to reset your password";	
-			$this->session->set_flashdata('msg', 'Kindly check your email and follow the instructions to reset your password');
-			$this->session->set_flashdata('utag_forgot_pass', $utag_data_send_password);
-			
-		}
-		else{
-			$this->session->set_flashdata('type', 'danger');
-			$this->session->set_flashdata('msg', 'Invalid Email provided or Account is In-Active, kindly contact our customer support if you forgot your email also or help in regarding Email Activation process.');
-			$this->session->set_flashdata('utag_forgot_pass', $utag_data_send_password);
-			//$data['msg']="Invalid Email provided, kindly contact our customer support if you forgot your email also.";			
-		}
-		redirect(base_url("home"));
-		//$this->load->view('my-account',$data);
-	}
+	
 	
 	
 	private function generateRandomString($length = 6) {
