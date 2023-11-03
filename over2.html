@@ -1,0 +1,89 @@
+
+<style>
+.slider {
+  overflow: auto;
+  display: grid; /* main element as grid */
+  grid-auto-columns: 20%;  /* width of the items */
+}
+.header,
+.body {
+   display: contents; /* remove the parent boundary to make sticky works */
+}
+.header > * {
+  grid-row: 1; /* all header elements in first row */
+}
+.body > * {
+  grid-row: 2; /* all body elements in second row */
+}
+.item {
+  height: 100px;
+  background: yellow;
+  border: 1px solid black;
+}
+
+.sticky-item-left {
+  position: sticky;
+  left: 0;  
+  background: red;
+}
+
+.sticky-item-right {
+  position: sticky;
+  right: 0;
+  background: green;
+}
+
+</style>
+
+<div class="slider">
+  <div class="header">
+    <div class="item sticky-item-left"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item sticky-item-right"></div>
+  </div>
+  <div class="body">
+    <div class="item sticky-item-left"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item"></div>
+    <div class="item sticky-item-right"></div>
+  </div>
+</div>
+
+

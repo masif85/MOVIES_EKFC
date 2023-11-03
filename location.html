@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.3.js"></script>   
+</head>
+<body>
+    <p>Address:<span id="country"></span></p>
+	    <!-- <p>Type: <span id="locationtype"></span></p>
+		    <p>Class:<span id="locationclass"></span></p> -->
+   
+    <script type="text/javascript">	
+
+var utag_data = {
+	"event_type":"page_view",
+	"page_category":"City Times Top News",
+	"page_currency_code":"AED",
+	"page_lang":"English",
+	"page_type":"city_times_home_page",
+	"tealium_event":"city_times_homepage",
+	"user_application":"desktop",
+	
+};
+
+
+
+	navigator.geolocation.getCurrentPosition(success, error);
+        function success(position) {
+		$.ajax({
+        url: "https://subscriptions.khaleejtimes.com/home/get_locations",
+        type: "GET",
+		dataType: "jsonp",
+		jsonp: 'callback',        
+        data: {lats: position.coords.latitude,longs:position.coords.longitude} ,
+        success: function (response) {			
+       
+		 utag_datas(response,position.coords.latitude,position.coords.longitude);
+		// $("#locationtype").html(response.company);
+		// $("#locationclass").html(response.type);
+        }        
+    });
+        }
+        function error(err) {
+            console.log(err)
+        }		
+function utag_datas(datas,latz,longz)
+{
+utag_data.lat=latz;
+utag_data.long=longz;
+utag_data.place_name=datas.place_name;
+utag_data.country=datas.country;
+utag_data.postal_code=datas.postal_code;
+utag_data.city=datas.city;
+utag_data.area=datas.area;
+utag_data.location=datas.location;
+utag_data.street=datas.street;
+
+}
+    </script>
+</body>
+</html>

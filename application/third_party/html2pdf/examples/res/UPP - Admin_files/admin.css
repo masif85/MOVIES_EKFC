@@ -1,0 +1,52 @@
+span.form-error {
+	color: #A94442;
+}
+tr.ticket-row {
+	cursor: pointer;
+}
+div.admin-chat-log {
+	height: 500px;
+	max-height: 500px;
+	overflow: auto;
+}
+ul.chat-tabs button {
+	margin-left: 10px;
+}
+p.admin-chat-log-system {
+	color: #999;
+}
+span.ts {
+	color: #999;
+}
+div.chat-list h4 {
+	font-size: 16px;
+	font-weight: bold;
+}
+div.chat-list p.list-group-item-text {
+	font-size: 11px;
+}
+span.lang {
+	color: #999;
+	position: absolute;
+	top: 10px;
+	right: 15px;
+}
+
+#layout p:last-child {
+	margin-bottom: 0;
+}
+
+.rtlInput {
+	direction: rtl;
+}
+
+.least-space {
+	white-space: nowrap;
+	width: 1%;
+}
+
+@media screen and (max-width: 800px) {
+	div.admin-chat-log {
+		height: auto;
+	}
+}
