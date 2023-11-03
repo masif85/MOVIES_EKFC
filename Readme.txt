@@ -1,3 +1,18 @@
+user admin:  
+username: admin 
+pwd:12345678
+
+user for movies: 
+username: asif.85@live.com  
+pwd: 12345678
+
+DB: db_vr.sql  => the file is already provided, just import it in your local server or web server.
+
+
+** You can update the usercredentials in app settings or directly from database table named as tbl_users
+
+
+
 web.rar
 This is main web app, kindly extract its contents and upload it in your local web server or online and perform below steps:
 
