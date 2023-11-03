@@ -33,7 +33,54 @@ public function index()
 	{
 	$this->load->view('reset-password');	
 	}
-
+	
+	public function send_password()
+	{
+		$email=$this->input->post("email");
+		$validate=$this->Main_Model->fetch_row("tbl_users","where user_email='$email' and status <> 0");	
+		if($validate!='0')
+		{		
+		$data=array("email"=>$email,"userid"=>$validate->id);
+		$this->Main_Model->insert_data("tbl_temp",$data);
+		
+		$mail = new PHPMailer;
+	$mail->isSMTP();
+	$mail->CharSet = 'UTF-8';
+	$mail->clearAllRecipients();
+	$mail->SMTPDebug = 0;
+	$mail->Debugoutput = 'html';
+	$mail->Host = "mail.upp.ae";
+	$mail->SMTPAutoTLS = false;
+	$mail->Port = 25;
+	$mail->SMTPAuth = false;
+	$mail->Username = "admin.it";
+	$mail->Password = "UPP@2018";
+	//$mail->addAttachment('إجراءات التسليم.jpg', 'إجراءات التسليم.jpg');	
+	$mail->setFrom('admin@moebookstore.ae', 'Moe Bookstore');
+	$mail->addAddress($email,$validate->username);
+	//$mail->addBCC('asim.iqbal@upp.ae','Asim Iqbal');
+	$mail->Subject = 'Reset Password, Moe Bookstore';
+	$msg_body="Dear $validate->username, <br />
+	We have received your request regarding your password reset, <br />
+	Kindly click on the following link to get an access to reset password screen.
+	
+	 <a href='".base_url()."Login/reset_screen/".md5($email)."/".md5($validate->id)."'>Click to Reset</a> or copy below link to get access <br />
+	<a href='".base_url()."Login/reset_screen/".md5($email)."/".md5($validate->id)."'>".base_url()."/Login/reset_screen/".md5($email)."/".md5($validate->id)."</a>
+	";
+	$mail->msgHTML($msg_body);
+	$mail->send();			
+			
+		//$data['msg']="Kindly check your email and follow the instructions to reset your password";	
+			$this->session->set_flashdata('msg', 'Kindly check your email and follow the instructions to reset your password');
+		}
+		else{
+			$this->session->set_flashdata('msg', '<font color="red"> Invalid Email provided or Account is In-Active, kindly contact our customer support if you forgot your email also or help in regarding Email Activation process.</font>');
+			//$data['msg']="Invalid Email provided, kindly contact our customer support if you forgot your email also.";
+			
+		}
+		redirect(base_url("Login"));
+		//$this->load->view('my-account',$data);
+	}
 	
 	public function reset_screen($email,$id)
 	{

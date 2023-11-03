@@ -18,14 +18,34 @@ class Home extends CI_Controller {
 	if($this->session->userdata('id'))
 	{	
 		//redirect(base_url().$this->CI->session->userdata('default_page').$cp_number);		
-		redirect(base_url("Home"));
+		redirect(base_url("home/view_movies"));
 	}
 		else
 		{
-			$this->load->view('login');
+			redirect(base_url("home/view_movies"));
 		}
 	}
-	
+	public function view_movies()
+	{
+		if (isset($_GET['page_no']) && $_GET['page_no']!="") {
+	$data['page_no'] = $_GET['page_no'];
+	} else {
+		$data['page_no'] = 1;
+        }
+		
+		
+		$data['total_records_per_page'] = 4;
+    $data['offset'] = ($data['page_no']-1) * $data['total_records_per_page'];
+	$data['previous_page'] = $data['page_no'] - 1;
+	$data['next_page'] = $data['page_no'] + 1;
+	$data['adjacents']= "2"; 
+		$data['movies']=$this->Main_Model->fetch_rows_joins("v.*,AVG(r.rating) as 'rating'","vr_movies v","LEFT JOIN vr_ratings r on v.id=r.movie_id WHERE status=1 
+		
+		
+		GROUP BY v.id LIMIT ".$data['offset'].", ".$data['total_records_per_page']."");
+		$data['total_records']=$this->Main_Model->fetch_row_counts("COUNT(*) As total_records",'vr_movies',"");
+		$this->load->view('view_user_movies_new',$data);
+	}
 	private function get_agent()
 	{
 		if ($this->agent->is_mobile())
@@ -55,7 +75,7 @@ class Home extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('login');
+			redirect(base_url("home/view_movies"));
 		}		
 	}
 
@@ -217,13 +237,32 @@ class Home extends CI_Controller {
 	
 	
 
+	public function signup()
+	{		
+			$data['full_name']=$this->input->post("name");
+			$data["username"]=$this->input->post("username");			
+			$data["password"]=md5($this->input->post("password"));					
+			$data["user_email"]=$this->input->post("username");
+			$data["password"]=md5($this->input->post("password"));
+			$data["contactno"]='1234678';
+			$data["user_type"]='Administrator';
+			$data["default_page"]='view_user_movies_new';
+			$data["status"]='3';
+			$data["user_role"]='2';
+			$data["sess_user_role"]='2';
+			$comp_id=$this->Main_Model->insert_data("tbl_users",$data);
+			$data["id"]=$comp_id;
+			$this->session->set_userdata($data);
+			redirect(base_url("home/view_movies"));	
+		
+	}
 	
 
 
 	
 
 	
-	public function check_login()
+	public function user_login()
 	{
 		$username=$this->input->post('username');
 		$password=$this->input->post('password');
@@ -234,8 +273,14 @@ class Home extends CI_Controller {
 		$this->session->set_userdata($user_dataz);
 
 		
-		redirect(base_url("home"));		
+		redirect(base_url("home/view_movies"));		
 	}
+	
+
+
+	
+
+
 	
 	
 		
@@ -244,7 +289,51 @@ class Home extends CI_Controller {
 		$this->load->view('forgotpassword');
 	}
 		
-	
+	public function send_password()
+	{
+		$utag_data_send_password='var utag_data = {
+		"event_type"       : "page_view",            	
+		"page_lang"        : "English",               	
+		"page_section"     : "section_page",          	 //This should capture dynamically page Category 
+		"page_type"        : "Homepage",             	
+		"tealium_event"    : "Forgot_Pass",           	
+		"user_application" : "'.$this->get_agent().'",             	 //This should capture dynamically desktop or mobile use
+		"user_forget_password"  : "'.$this->input->post("email").'"                  	//This should capture dynamically user email
+		};';
+		
+		$email=$this->input->post("email");
+		$validate=$this->Main_Model->fetch_row("tbl_users","where user_email='$email' and status <> 0");	
+		if($validate!='0')
+		{	
+			$randid=md5(date("dmy-his")).$this->generateRandomString();
+			$data=array("email"=>$email,"userid"=>$validate->id,"encrypted_id"=>$randid);
+			$this->Main_Model->insert_data("tbl_temp",$data);		
+			$email_data["to"]=$email;
+			$email_data["from"]="noreply@competitions.khaleejtimes.com";
+			$email_data["bcc"]="masif@khaleejtimes.com";
+			$email_data["subject"]="Reset Password, Khaleej Times Competition";	
+			$msg_body="Dear $validate->first_name $validate->last_name, <br />
+			We have received your request regarding your password reset, <br />
+			Kindly click on the following link to get an access to reset password screen.	
+			<a href='".base_url()."Home/reset_screen/".md5($email)."/".md5($validate->id)."/".$randid."'>Click to Reset</a> or copy below link to get access <br />
+			<a href='".base_url()."Home/reset_screen/".md5($email)."/".md5($validate->id)."/".$randid."'>".base_url()."/Home/reset_screen/".md5($email)."/".md5($validate->id)."/".$randid."</a>";
+			$email_data["msg_body"]=$msg_body;
+			send_mail($email_data);
+			$this->session->set_flashdata('type', 'success');
+			//$data['msg']="Kindly check your email and follow the instructions to reset your password";	
+			$this->session->set_flashdata('msg', 'Kindly check your email and follow the instructions to reset your password');
+			$this->session->set_flashdata('utag_forgot_pass', $utag_data_send_password);
+			
+		}
+		else{
+			$this->session->set_flashdata('type', 'danger');
+			$this->session->set_flashdata('msg', 'Invalid Email provided or Account is In-Active, kindly contact our customer support if you forgot your email also or help in regarding Email Activation process.');
+			$this->session->set_flashdata('utag_forgot_pass', $utag_data_send_password);
+			//$data['msg']="Invalid Email provided, kindly contact our customer support if you forgot your email also.";			
+		}
+		redirect(base_url("home"));
+		//$this->load->view('my-account',$data);
+	}
 	
 	
 	private function generateRandomString($length = 6) {

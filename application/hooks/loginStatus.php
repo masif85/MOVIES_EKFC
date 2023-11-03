@@ -81,7 +81,8 @@ function set_back_from_login() {
 				redirect(base_url("home/login"), 'refresh');
 			}				
 			if(!$invalid1 && $segment_1 != '' && $segment_1 != 'login' && $segment_1 != 'noAccess'  && @$this->CI->uri->segment(2) != 'logout' && $segment_1 != 'home' && $segment_1 != 'pages'){							
-				$role_id = $this->CI->session->userdata('sess_user_role');				
+				$role_id = $this->CI->session->userdata('sess_user_role');	
+			
 				$user_id = $this->CI->session->userdata('id');
 				$controller_slug = $segment_1;
 				$method_slug = @$this->CI->uri->segment(2); if(!$method_slug) $method_slug = 'index';			

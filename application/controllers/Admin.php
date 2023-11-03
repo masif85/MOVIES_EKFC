@@ -124,8 +124,7 @@ echo json_encode("success");
 	public function create_movie($comp_id="")
 	{	
 		
-	echo "yes";
-	exit;
+	
 		$cover_picture="";
 		if($_FILES["cover_picture"]['name'])
 		{

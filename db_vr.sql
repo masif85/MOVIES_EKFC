@@ -11,7 +11,7 @@
  Target Server Version : 100418
  File Encoding         : 65001
 
- Date: 03/11/2023 16:16:04
+ Date: 04/11/2023 02:27:52
 */
 
 SET NAMES utf8mb4;
@@ -3717,13 +3717,14 @@ CREATE TABLE `tbl_users`  (
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `unique`(`username`) USING BTREE,
   INDEX `id`(`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 9 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of tbl_users
 -- ----------------------------
 INSERT INTO `tbl_users` VALUES (1, 'admin', '25d55ad283aa400af464c76d713c07ad', 'masif@khaleejtimes.com', '97150546456465', 'superadmin', 'dashboard', '71046d00682cfc20305a703985869d4c.jpg', 3, 'Muhammad', 1, '0');
-INSERT INTO `tbl_users` VALUES (3, 'asif.85@live.com', '25d55ad283aa400af464c76d713c07ad', 'asif.85@live.com', '1234678', 'Administrator', 'view_user_movies', '7433375.png', 3, 'Muhammad Asif', 2, '0');
+INSERT INTO `tbl_users` VALUES (3, 'asif.85@live.com', '25d55ad283aa400af464c76d713c07ad', 'asif.85@live.com', '1234678', 'Administrator', 'view_user_movies_new', '7433375.png', 3, 'Muhammad Asif', 2, '0');
+INSERT INTO `tbl_users` VALUES (8, 'asif@asifabbasi.com', '25d55ad283aa400af464c76d713c07ad', 'asif@asifabbasi.com', '1234678', 'Administrator', 'view_user_movies_new', NULL, 3, 'Asif Khan Jadoon', 2, '0');
 
 -- ----------------------------
 -- Table structure for vr_movies
@@ -3768,9 +3769,10 @@ CREATE TABLE `vr_ratings`  (
   `movie_id` bigint(20) NULL DEFAULT NULL,
   `rating` double NULL DEFAULT NULL,
   `ip` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `date` datetime(0) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 5 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+  `date` datetime(0) NULL DEFAULT current_timestamp(0) ON UPDATE CURRENT_TIMESTAMP(0),
+  PRIMARY KEY (`id`) USING BTREE,
+  UNIQUE INDEX `UNIQUES`(`user_id`, `movie_id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of vr_ratings
@@ -3779,6 +3781,7 @@ INSERT INTO `vr_ratings` VALUES (1, 1, 1, 2.5, NULL, NULL);
 INSERT INTO `vr_ratings` VALUES (2, 3, 5, 3, '::1', NULL);
 INSERT INTO `vr_ratings` VALUES (3, 3, 3, 4, '::1', NULL);
 INSERT INTO `vr_ratings` VALUES (4, 3, 2, 3, '::1', NULL);
+INSERT INTO `vr_ratings` VALUES (5, 3, 24, 4, '::1', '2023-11-04 02:21:04');
 
 -- ----------------------------
 -- Table structure for vr_users
