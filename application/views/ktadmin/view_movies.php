@@ -124,25 +124,15 @@ $('.call_modal').click(function(){
 	
 	
 $('.update_status').click(function(){ 	
-	var type="normal";
-	var id=$(this).attr('id');	
-	if ($(this).is(":checked"))
-		{
-		  var value=1;
-		}
-			else
-		{
-			
-			var value=0;
-		}
 	
+	var id=$(this).attr('id');	
 
 	var url = "<?php echo base_url("Admin/change_status"); ?>"; 
 	type=$(this).attr('but_type');
     $.ajax({
         url: url,
 		type:"POST",
-		data:{id:id,value:value,type:type},
+		data:{id:id},
         dataType: 'json',		
         success: function(res) {
         location.reload();

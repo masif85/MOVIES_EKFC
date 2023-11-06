@@ -271,20 +271,17 @@ $check=1;
 	public function change_status()
 	{
 		$id=$this->input->post("id");
-		$type=$this->input->post("type");
-		$value=$this->input->post("value");
-		if($type=='disable')
-		{
-		$data=array("disable"=>1);
+
+$cmp_data=$this->Main_Model->fetch_row("vr_movies"," where id='$id'");
+			
+			$cover_picture=$cmp_data->cover_picture;
+			$video=$cmp_data->video;					
+			$imagePath = '../public/editions/pics';
+			unlink(realpath(APPPATH . $imagePath."/".$cmp_data->cover_picture));
+			$videopath = '../public/editions/assets';
+			unlink(realpath(APPPATH . $videopath."/".$cmp_data->video));		
+		$this->Main_Model->delete_query($id,"vr_movies","id");	
 		
-		$this->Main_Model->update_data("vr_editions",$data,"id",$id);	
-		}
-		else
-		{
-		$data=array("status"=>$value);
-		
-		$this->Main_Model->update_data("vr_editions",$data,"id",$id);
-		}
 	}	
 	
 	private function upload_files($filename,$path)
